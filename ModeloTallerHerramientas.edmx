@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TallerHerramientasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Colaboradores">
+          <Key>
+            <PropertyRef Name="CedulaIdentidad" />
+          </Key>
+          <Property Name="CedulaIdentidad" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaRegistro" Type="date" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Herramientas">
+          <Key>
+            <PropertyRef Name="CodigoHerramienta" />
+          </Key>
+          <Property Name="CodigoHerramienta" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="CantidadDisponible" Type="int" />
+        </EntityType>
+        <EntityType Name="PrestamosHerramientas">
+          <Key>
+            <PropertyRef Name="IDPrestamo" />
+          </Key>
+          <Property Name="IDPrestamo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedulaIdentidad" Type="nvarchar" MaxLength="20" />
+          <Property Name="CodigoHerramienta" Type="nvarchar" MaxLength="20" />
+          <Property Name="FechaPrestamo" Type="date" />
+          <Property Name="FechaCompromisoDevolucion" Type="date" />
+          <Property Name="FechaRealDevolucion" Type="date" />
+        </EntityType>
+        <Association Name="FK__Prestamos__Cedul__4F7CD00D">
+          <End Role="Colaboradores" Type="Self.Colaboradores" Multiplicity="0..1" />
+          <End Role="PrestamosHerramientas" Type="Self.PrestamosHerramientas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colaboradores">
+              <PropertyRef Name="CedulaIdentidad" />
+            </Principal>
+            <Dependent Role="PrestamosHerramientas">
+              <PropertyRef Name="CedulaIdentidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prestamos__Codig__5070F446">
+          <End Role="Herramientas" Type="Self.Herramientas" Multiplicity="0..1" />
+          <End Role="PrestamosHerramientas" Type="Self.PrestamosHerramientas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Herramientas">
+              <PropertyRef Name="CodigoHerramienta" />
+            </Principal>
+            <Dependent Role="PrestamosHerramientas">
+              <PropertyRef Name="CodigoHerramienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TallerHerramientasModelStoreContainer">
+          <EntitySet Name="Colaboradores" EntityType="Self.Colaboradores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Herramientas" EntityType="Self.Herramientas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrestamosHerramientas" EntityType="Self.PrestamosHerramientas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Prestamos__Cedul__4F7CD00D" Association="Self.FK__Prestamos__Cedul__4F7CD00D">
+            <End Role="Colaboradores" EntitySet="Colaboradores" />
+            <End Role="PrestamosHerramientas" EntitySet="PrestamosHerramientas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prestamos__Codig__5070F446" Association="Self.FK__Prestamos__Codig__5070F446">
+            <End Role="Herramientas" EntitySet="Herramientas" />
+            <End Role="PrestamosHerramientas" EntitySet="PrestamosHerramientas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TallerHerramientasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Colaboradores">
+          <Key>
+            <PropertyRef Name="CedulaIdentidad" />
+          </Key>
+          <Property Name="CedulaIdentidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PrestamosHerramientas" Relationship="Self.FK__Prestamos__Cedul__4F7CD00D" FromRole="Colaboradores" ToRole="PrestamosHerramientas" />
+        </EntityType>
+        <EntityType Name="Herramientas">
+          <Key>
+            <PropertyRef Name="CodigoHerramienta" />
+          </Key>
+          <Property Name="CodigoHerramienta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadDisponible" Type="Int32" />
+          <NavigationProperty Name="PrestamosHerramientas" Relationship="Self.FK__Prestamos__Codig__5070F446" FromRole="Herramientas" ToRole="PrestamosHerramientas" />
+        </EntityType>
+        <EntityType Name="PrestamosHerramientas">
+          <Key>
+            <PropertyRef Name="IDPrestamo" />
+          </Key>
+          <Property Name="IDPrestamo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedulaIdentidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoHerramienta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FechaPrestamo" Type="DateTime" Precision="0" />
+          <Property Name="FechaCompromisoDevolucion" Type="DateTime" Precision="0" />
+          <Property Name="FechaRealDevolucion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Colaboradores" Relationship="Self.FK__Prestamos__Cedul__4F7CD00D" FromRole="PrestamosHerramientas" ToRole="Colaboradores" />
+          <NavigationProperty Name="Herramientas" Relationship="Self.FK__Prestamos__Codig__5070F446" FromRole="PrestamosHerramientas" ToRole="Herramientas" />
+        </EntityType>
+        <Association Name="FK__Prestamos__Cedul__4F7CD00D">
+          <End Role="Colaboradores" Type="Self.Colaboradores" Multiplicity="0..1" />
+          <End Role="PrestamosHerramientas" Type="Self.PrestamosHerramientas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colaboradores">
+              <PropertyRef Name="CedulaIdentidad" />
+            </Principal>
+            <Dependent Role="PrestamosHerramientas">
+              <PropertyRef Name="CedulaIdentidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prestamos__Codig__5070F446">
+          <End Role="Herramientas" Type="Self.Herramientas" Multiplicity="0..1" />
+          <End Role="PrestamosHerramientas" Type="Self.PrestamosHerramientas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Herramientas">
+              <PropertyRef Name="CodigoHerramienta" />
+            </Principal>
+            <Dependent Role="PrestamosHerramientas">
+              <PropertyRef Name="CodigoHerramienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TallerHerramientasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Colaboradores" EntityType="Self.Colaboradores" />
+          <EntitySet Name="Herramientas" EntityType="Self.Herramientas" />
+          <EntitySet Name="PrestamosHerramientas" EntityType="Self.PrestamosHerramientas" />
+          <AssociationSet Name="FK__Prestamos__Cedul__4F7CD00D" Association="Self.FK__Prestamos__Cedul__4F7CD00D">
+            <End Role="Colaboradores" EntitySet="Colaboradores" />
+            <End Role="PrestamosHerramientas" EntitySet="PrestamosHerramientas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prestamos__Codig__5070F446" Association="Self.FK__Prestamos__Codig__5070F446">
+            <End Role="Herramientas" EntitySet="Herramientas" />
+            <End Role="PrestamosHerramientas" EntitySet="PrestamosHerramientas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TallerHerramientasModelStoreContainer" CdmEntityContainer="TallerHerramientasEntities">
+          <EntitySetMapping Name="Colaboradores">
+            <EntityTypeMapping TypeName="TallerHerramientasModel.Colaboradores">
+              <MappingFragment StoreEntitySet="Colaboradores">
+                <ScalarProperty Name="CedulaIdentidad" ColumnName="CedulaIdentidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Herramientas">
+            <EntityTypeMapping TypeName="TallerHerramientasModel.Herramientas">
+              <MappingFragment StoreEntitySet="Herramientas">
+                <ScalarProperty Name="CodigoHerramienta" ColumnName="CodigoHerramienta" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CantidadDisponible" ColumnName="CantidadDisponible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrestamosHerramientas">
+            <EntityTypeMapping TypeName="TallerHerramientasModel.PrestamosHerramientas">
+              <MappingFragment StoreEntitySet="PrestamosHerramientas">
+                <ScalarProperty Name="IDPrestamo" ColumnName="IDPrestamo" />
+                <ScalarProperty Name="CedulaIdentidad" ColumnName="CedulaIdentidad" />
+                <ScalarProperty Name="CodigoHerramienta" ColumnName="CodigoHerramienta" />
+                <ScalarProperty Name="FechaPrestamo" ColumnName="FechaPrestamo" />
+                <ScalarProperty Name="FechaCompromisoDevolucion" ColumnName="FechaCompromisoDevolucion" />
+                <ScalarProperty Name="FechaRealDevolucion" ColumnName="FechaRealDevolucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

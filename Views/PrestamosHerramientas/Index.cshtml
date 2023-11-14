@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AriasRomanJonathan_Proyecto1.PrestamosHerramientas>
+
+@{
+    ViewBag.Title = "Préstamo/Devolución de Herramientas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+       <th>
+          @Html.DisplayName("Fecha de Préstamo")
+       </th>
+       <th>
+          @Html.DisplayName("Fecha Compromiso Devolución")
+       </th>
+       <th>
+          @Html.DisplayName("Fecha de Devolución")
+       </th>
+       <th>
+          @Html.DisplayName("Nombre del Colaborador")
+       </th>
+       <th>
+          @Html.DisplayName("Nombre de Herramienta")
+       </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaPrestamo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCompromisoDevolucion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRealDevolucion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Colaboradores.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Herramientas.Nombre)
+        </td>
+        <td>
+           <a href="@Url.Action("Edit", new { id = item.IDPrestamo })" class="btn btn-warning">Editar</a> |
+           <a href="@Url.Action("Details", new { id = item.IDPrestamo })" class="btn btn-info">Detalles</a> |
+           <a href="@Url.Action("Delete", new { id = item.IDPrestamo })" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>

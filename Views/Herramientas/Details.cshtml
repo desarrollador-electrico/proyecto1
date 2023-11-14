@@ -1,0 +1,43 @@
+﻿@model AriasRomanJonathan_Proyecto1.Herramientas
+
+@{
+    ViewBag.Title = "Información Herramientas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Herramientas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadDisponible)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   <a href="@Url.Action("Edit", new { id = Model.CodigoHerramienta })" class="btn btn-warning">Editar</a>
+   <a href="@Url.Action("Index")" class="btn btn-secondary">Regresar</a>
+</p>

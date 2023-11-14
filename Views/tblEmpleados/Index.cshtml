@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AriasRomanJonathan_Proyecto1.tblEmpleados>
+
+@{
+    ViewBag.Title = "Ejemplo CRUD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ejemplo CRUD</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+        <td>
+           <a href="@Url.Action("Edit", new { id = item.ID })" class="btn btn-warning">Editar</a> |
+           <a href="@Url.Action("Details", new { id = item.ID })" class="btn btn-info">Detalles</a> |
+           <a href="@Url.Action("Delete", new { id = item.ID })" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AriasRomanJonathan_Proyecto1.Colaboradores>
+
+@{
+    ViewBag.Title = "Colaboradores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Colaboradores</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRegistro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td> 
+           <a href="@Url.Action("Edit", new { id = item.CedulaIdentidad })" class="btn btn-warning">Editar</a> |
+           <a href="@Url.Action("Details", new { id = item.CedulaIdentidad })" class="btn btn-info">Detalles</a> |
+           <a href="@Url.Action("Delete", new { id = item.CedulaIdentidad })" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>

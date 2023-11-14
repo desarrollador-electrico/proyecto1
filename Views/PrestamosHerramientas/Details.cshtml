@@ -1,0 +1,59 @@
+﻿@model AriasRomanJonathan_Proyecto1.PrestamosHerramientas
+
+@{
+    ViewBag.Title = "Información Préstamos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>PrestamosHerramientas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       <dt>
+          @Html.DisplayName("Fecha de Préstamo")
+       </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaPrestamo)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Fecha de Compromiso para Devolución")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompromisoDevolucion)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Fecha de Devolución")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRealDevolucion)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Nombre del Colaborador")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colaboradores.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Nombre de la Herramienta")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Herramientas.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   <a href="@Url.Action("Edit", new { id = Model.IDPrestamo })" class="btn btn-warning">Editar</a>
+   <a href="@Url.Action("Index")" class="btn btn-secondary">Regresar</a>
+</p>

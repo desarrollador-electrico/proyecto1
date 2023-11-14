@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AriasRomanJonathan_Proyecto1.Herramientas>
+
+@{
+    ViewBag.Title = "Herramientas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Herramientas</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadDisponible)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadDisponible)
+        </td>
+        <td>
+           <a href="@Url.Action("Edit", new { id = item.CodigoHerramienta })" class="btn btn-warning">Editar</a> |
+           <a href="@Url.Action("Details", new { id = item.CodigoHerramienta })" class="btn btn-info">Detalles</a> |
+           <a href="@Url.Action("Delete", new { id = item.CodigoHerramienta })" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>
